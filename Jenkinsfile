@@ -5,12 +5,12 @@ pipeline {
         jdk 'jdk-17'
     }
     stages {
-        stage('git checkout') {
+        stage('git checkout')  {
             steps {
                 git 'https://github.com/Ankitha-aa1/Chat_Room.git'
             }
-        }
-        stage('compile') {   
+       }
+        stage('compile') { 
             steps {
                 bat 'mvn compile'
             }
