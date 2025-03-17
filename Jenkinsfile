@@ -2,7 +2,7 @@ pipeline {
     agent any
      tools{
         maven 'maven'
-        java  'java-17'
+        jdk 'jdk-17'
      }
        stages {
           stage('git checkout') {
@@ -10,6 +10,11 @@ pipeline {
                 git 'https://github.com/Ankitha-aa1/Chat_Room.git'
              }
           }
+            stage {
+                steps {
+                    bat 'mvn compile'
+                }
+            }   
              stage ('build') {
                 steps {
                     bat 'mvn package'
