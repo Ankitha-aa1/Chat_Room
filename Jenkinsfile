@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent (label 'windows slave-1')
     tools {
         maven 'maven'
     }
