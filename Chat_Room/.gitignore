@@ -1,0 +1,9 @@
+AppData/
+OneDrive/
+*.DAT
+*.LOG*
+*.ini
+.ssh/
+.gitconfig
+.bash_history
+.vscode/
