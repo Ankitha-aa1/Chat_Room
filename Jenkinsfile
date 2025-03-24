@@ -11,12 +11,12 @@ pipeline {
        }
         stage('compile') { 
             steps {
-                bat 'mvn compile'
+                sh 'mvn compile'
             }
         }
         stage('package') {
             steps {
-                bat 'mvn package'
+                sh 'mvn package'
             }
         }
     }
