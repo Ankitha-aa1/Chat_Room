@@ -6,17 +6,17 @@ pipeline {
     stages {
         stage('git checkout')  {
             steps {
-                git 'https://github.com/Ankitha-aa1/Chat_Room.git'
+                git credentialsId: 'git-ssh', url: 'git@github.com:Ankitha-aa1/Chat_Room.git'
             }
        }
         stage('compile') { 
             steps {
-                sh 'mvn compile'
+                bat 'mvn compile'
             }
         }
         stage('package') {
             steps {
-                sh'mvn package'
+                bat 'mvn package'
             }
         }
     }
