@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('git checkout')  {
             steps {
-                git credentialsID: 'ssh1' 'https://github.com/Ankitha-aa1/Chat_Room.git'
+                git credentialsID: 'ssh' 'https://github.com/Ankitha-aa1/Chat_Room.git'
             }
        }
         stage('compile') { 
