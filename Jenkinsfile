@@ -1,37 +1,34 @@
 pipeline {
-    agent { label 'slave-1' }
+   agent any
 
-    tools {
-        maven 'maven'
-    }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git url: 'git@github.com:Ankitha-aa1/Chat_Room.git', credentialsId: 'ssh1'
+   stages {
+      stage('git checkout') {
+        steps {
+            git 'https://github.com/Ankitha-aa1/Chat_Room.git'  
+        }
+      }
+      stage('code analysis') {
+        steps {
+            withSonarQubeEnv('sonar-server') {
+                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chat-Room \
+               -Dsonar.java.binaries=. \
+               -Dsonar.projectKey=Chat_Room'''
+               }
+        }
+      }
+      stage('docker build') {
+        steps {
+            script {
+              sh 'docker build -t chat-room .' 
             }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
+      }
     }
-
-    post {
-        always {
-            emailext(
-                subject: "Jenkins Build: ${currentBuild.fullDisplayName}",
-                body: "Build completed with status: ${currentBuild.currentResult}",
-                to: 'mankitha91@gmail.com'
-            )
-        }
-    }
-}
+   stage('docker container') {
+         steps {
+            script {
+               sh 'docker run -itd --name chat-room -p 8082:8080 chat-room'
+              }
+          }
+    }    
+ }       
+}    
