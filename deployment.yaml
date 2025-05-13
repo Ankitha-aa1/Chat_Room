@@ -12,7 +12,7 @@ spec:
    spec:
      containers:
       - name: chatroom
-        image: sushmaagowdaa/chatroom
+        image: ankii1212/chat-room:latest 
         ports:
          - containerPort: 8080
   selector:
